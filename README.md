@@ -1,4 +1,3 @@
-
 This is an open source (GPL3) release of SourceGear DiffMerge.
 
 Example command lines to build:
@@ -30,3 +29,8 @@ Currently, the platforms included are:
 
 Please note that macOS builds are neither signed nor notarized.
 
+Require libraries to build
+
+```
+sudo dnf5 install -y 'gcc-c++' gtk3-devel glib2-devel libSM-devel zlib-devel libjpeg-turbo-devel libpng-devel libtiff-devel libcurl-devel
+```
