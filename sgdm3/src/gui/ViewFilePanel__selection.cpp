@@ -488,11 +488,12 @@ bool ViewFilePanel::_getTextFromClipboard(wxTextDataObject & tdo)
 	if (!wxTheClipboard->Open())
 		return false;
 	
-	if (wxTheClipboard->IsSupported(wxDF_TEXT))
+	if (wxTheClipboard->IsSupported(wxDF_UNICODETEXT)
+		|| wxTheClipboard->IsSupported(wxDF_TEXT))
 	{
-		wxTheClipboard->GetData(tdo);
+		bool bGotData = wxTheClipboard->GetData(tdo);
 		wxTheClipboard->Close();
-		return true;
+		return bGotData;
 	}
 	else
 	{

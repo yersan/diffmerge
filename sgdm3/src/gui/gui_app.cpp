@@ -143,10 +143,14 @@ int gui_app::OnExit(void)
 	// if we put something on the clipboard, leave it there (otherwise, by default when wxTheClipboard is
 	// destroyed, it will clear the clipboard).  this may leak a little memory on windows.
 
+#if defined(__WXGTK__)
+    wxTheClipboard->Flush();
+#else
     if (wxTheClipboard->IsOpened())
     {
         wxTheClipboard->Flush();
     }
+#endif
 
 	_cleanup_help();
 	_cleanup();
@@ -794,4 +798,3 @@ void gui_app::onEndSession(wxCloseEvent & /*e*/)
 	gpFrameFactory->closeAllFrames(true);
 	wxLogTrace(wxTRACE_Messages, _T("gui_app:onEndSession() end..."));
 }
-
